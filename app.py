@@ -1,5 +1,6 @@
 import pandas as pd 
 import streamlit as st 
+import matplotlib.pyplot as plt
 
 
 df = pd.read_csv("sofascore.csv")
@@ -28,5 +29,18 @@ def categorize_time(dt):
 
 df['time_of_day'] = df['dt'].apply(categorize_time)
 
+
 st.dataframe(df)
 
+
+fig = plt.figure(figsize=(10, 6))
+plt.hist(df['odd'], bins=20, edgecolor='black')
+plt.title('Distribution of Odds')
+plt.xlabel('Odd Value')
+plt.ylabel('Frequency')
+
+# Display the plot in Streamlit
+st.pyplot(fig)
+
+# Add some spacing
+st.write("odds distribution")
